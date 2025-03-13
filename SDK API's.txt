@@ -1,0 +1,5 @@
+Minimum SDK (API Level): API Level 21 (Android 5.0 Lollipop) – This level covers a large range of devices, ensuring broad compatibility.
+
+Target SDK (API Level): API Level 33 (Android 13) – Targeting the latest version (Android 13) will allow your app to use updated permissions and enhancements relevant to location and mapping.
+
+Compile SDK (API Level): API Level 33 (Android 13) – Matching your compile SDK with the target ensures compatibility with the latest Android tools and libraries, especially beneficial for handling Google Maps and location services.
