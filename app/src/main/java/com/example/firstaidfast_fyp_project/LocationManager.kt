@@ -8,6 +8,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import android.annotation.SuppressLint
+import com.google.android.gms.location.*
 
 class LocationManager(private val activity: ComponentActivity) {
     private val fusedLocationClient: FusedLocationProviderClient =
@@ -16,12 +18,11 @@ class LocationManager(private val activity: ComponentActivity) {
     val locationPermissionRequest =
         activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
-                // Permission granted, fetch the location
-            } else {
-                // Permission denied, handle appropriately
+                getLocation { }
             }
         }
 
+    @SuppressLint("MissingPermission")
     fun getLocation(onLocationFetched: (Location?) -> Unit) {
         if (ActivityCompat.checkSelfPermission(
                 activity,
@@ -31,8 +32,15 @@ class LocationManager(private val activity: ComponentActivity) {
             locationPermissionRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             return
         }
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            onLocationFetched(location)
+
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000).build()
+        val locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                fusedLocationClient.removeLocationUpdates(this)
+                val location = locationResult.lastLocation
+                onLocationFetched(location)
+            }
         }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, activity.mainLooper)
     }
 }

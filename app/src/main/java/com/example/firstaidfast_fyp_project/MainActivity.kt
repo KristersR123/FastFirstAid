@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.firstaidfast_fyp_project.ui.theme.FirstAidFastFYP_ProjectTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlin.math.atan2
@@ -26,17 +27,69 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+//class MainActivity : ComponentActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContent {
+//            MaterialTheme {
+//                // For example, show the queue summary screen
+//                HospitalQueueScreen()
+//            }
+//        }
+//    }
+//}
+
+
+
+
+
 class MainActivity : ComponentActivity() {
+    private lateinit var locationManager: LocationManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme {
-                // For example, show the queue summary screen
-                HospitalQueueScreen()
-            }
+
+        locationManager = LocationManager(this)
+
+        locationManager.getLocation { location ->
+            location?.let {
+                val userLat = it.latitude
+                val userLon = it.longitude
+                Log.d("MainActivity", "✅ Location received: ($userLat, $userLon)")
+
+                setContent {
+                    FirstAidFastFYP_ProjectTheme {
+                        // ✅ Pass correct parameters to HospitalQueueScreen
+                        HospitalQueueScreen(userLat = userLat, userLon = userLon)
+                    }
+                }
+            } ?: Log.e("MainActivity", "❌ Failed to fetch location")
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    private lateinit var fusedLocationClient: FusedLocationProviderClient
 //

@@ -2,9 +2,12 @@ package com.example.firstaidfast_fyp_project
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+
 
 // Sealed class representing different UI states
 sealed class WaitlistUiState {
@@ -19,10 +22,14 @@ class HospitalWaitViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<WaitlistUiState>(WaitlistUiState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    fun loadHospitalWaitTime() {
+    /**
+     * Loads the hospital wait time summary once.
+     */
+    fun loadHospitalWaitTimeOnce() {
         _uiState.value = WaitlistUiState.Loading
         viewModelScope.launch {
             try {
+                // Fetch summary using WaitlistRepository (which uses Retrofit+Gson)
                 val summary = WaitlistRepository.fetchHospitalWaitTime()
                 _uiState.value = WaitlistUiState.SummarySuccess(
                     totalWait = summary.totalWait,
@@ -34,6 +41,21 @@ class HospitalWaitViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Starts a loop that refreshes the hospital wait time summary every 30 seconds.
+     */
+    fun startRealtimeUpdates() {
+        viewModelScope.launch {
+            while (true) {
+                loadHospitalWaitTimeOnce()
+                delay(30000L) // Wait for 30 seconds before next update
+            }
+        }
+    }
+
+    /**
+     * Optionally, load the full waitlist.
+     */
     fun loadFullWaitlist() {
         _uiState.value = WaitlistUiState.Loading
         viewModelScope.launch {
