@@ -55,15 +55,15 @@ class MainActivity : ComponentActivity() {
             location?.let {
                 val userLat = it.latitude
                 val userLon = it.longitude
-                Log.d("MainActivity", "✅ Location received: ($userLat, $userLon)")
+                Log.d("MainActivity", "Location received: ($userLat, $userLon)")
 
                 setContent {
                     FirstAidFastFYP_ProjectTheme {
-                        // ✅ Pass correct parameters to HospitalQueueScreen
+                        // Passed parameters to HospitalQueueScreen
                         HospitalQueueScreen(userLat = userLat, userLon = userLon)
                     }
                 }
-            } ?: Log.e("MainActivity", "❌ Failed to fetch location")
+            } ?: Log.e("MainActivity", "Failed to fetch location")
         }
     }
 }

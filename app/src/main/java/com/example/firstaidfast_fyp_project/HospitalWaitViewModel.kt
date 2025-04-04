@@ -42,13 +42,13 @@ class HospitalWaitViewModel : ViewModel() {
     }
 
     /**
-     * Starts a loop that refreshes the hospital wait time summary every 30 seconds.
+     * Starts a loop that refreshes the hospital wait time summary every 50 seconds.
      */
     fun startRealtimeUpdates() {
         viewModelScope.launch {
             while (true) {
                 loadHospitalWaitTimeOnce()
-                delay(30000L) // Wait for 30 seconds before next update
+                delay(5000L) // Wait for 30 seconds before next update
             }
         }
     }
