@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "781602336535",
+    "firebase_url": "https://hospitalkiosk-a92a4-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "hospitalkiosk-a92a4",
+    "storage_bucket": "hospitalkiosk-a92a4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781602336535:android:aa74e07ee5e4f7cf1f5152",
+        "android_client_info": {
+          "package_name": "com.example.firstaidfast_fyp_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDLvJUgEsWCi6etR5NtIlQihXzc9N8DQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
