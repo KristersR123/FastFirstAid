@@ -8,40 +8,7 @@ import retrofit2.http.GET
  * generate HTTP requests.
  */
 interface WaitlistApi {
-<<<<<<< HEAD
 
-    /**
-     * GET endpoint that fetches a HospitalQueueSummary object
-     * containing total wait time and patient count.
-     */
-    @GET("hospital-wait-time")
-    suspend fun getHospitalWaitTime(): HospitalQueueSummary
-
-    /**
-     * GET endpoint that returns a list of WaitlistItem objects,
-     * representing each patient's current waitlist status.
-     */
-    @GET("waitlist")
-    suspend fun getWaitlist(): List<WaitlistItem>
-}
-
-/*
-Explanation in the project context:
-
-- This interface is part of the Retrofit setup for making HTTP requests
-  to a remote server or local backend that manages hospital wait times.
-
-- The "hospital-wait-time" endpoint returns summary-level data such as
-  the total cumulative wait time of all patients and the number of patients
-  in queue.
-
-- The "waitlist" endpoint returns a detailed list of all queued patients,
-  each with fields like patientID, severity, and estimated wait time.
-
-- Both endpoints are defined as suspend functions, meaning they can be
-  called within Kotlin coroutines for asynchronous, non-blocking operations.
-*/
-=======
     @GET("hospitalA/hospital-wait-time")
     suspend fun getHospitalAWaitTime(): HospitalQueueSummary
 
@@ -54,4 +21,4 @@ Explanation in the project context:
     @GET("hospitalB/waitlist")
     suspend fun getHospitalBWaitlist(): List<WaitlistItem>
 }
->>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
+

@@ -19,32 +19,14 @@ object WaitlistRepository {
             .build()
     }
 
-<<<<<<< HEAD
     // Creates a lazy-initialised WaitlistApi interface from the Retrofit instance.
-    // This interface defines the endpoints for fetching hospital wait info.
-    private val waitlistApi: WaitlistApi by lazy {
-        retrofit.create(WaitlistApi::class.java)
-    }
-
-    /**
-     * fetchHospitalWaitTime calls the WaitlistApi to get a summary
-     * of hospital wait information (total wait and patient count).
-     */
-    suspend fun fetchHospitalWaitTime(): HospitalQueueSummary {
-        return waitlistApi.getHospitalWaitTime()
-    }
-
-    /**
-     * fetchWaitlist calls the WaitlistApi to retrieve a detailed list
-     * of patients currently in the waitlist, including estimated times.
-     */
-    suspend fun fetchWaitlist(): List<WaitlistItem> {
-        return waitlistApi.getWaitlist()
-=======
     private val api: WaitlistApi by lazy {
         retrofit.create(WaitlistApi::class.java)
     }
 
+    /**
+     * fetchHospitalWaitTime calls the correct endpoint depending on hospital name.
+     */
     suspend fun fetchHospitalWaitTime(hospital: String): HospitalQueueSummary {
         return when (hospital) {
             "St. James's Hospital" -> api.getHospitalAWaitTime()
@@ -53,23 +35,14 @@ object WaitlistRepository {
         }
     }
 
+    /**
+     * fetchWaitlist returns the live waitlist for the requested hospital.
+     */
     suspend fun fetchWaitlist(hospital: String): List<WaitlistItem> {
         return when (hospital) {
             "St. James's Hospital" -> api.getHospitalAWaitlist()
             "Cork University Hospital" -> api.getHospitalBWaitlist()
             else -> emptyList()
         }
->>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
     }
 }
-
-/*
-Explanation in the project context:
-- This repository acts as a layer that the ViewModel (or other classes) can call
-  to fetch data from the remote server without having to deal directly with
-  Retrofit code.
-- The calls are marked suspend to be used within coroutines for asynchronous
-  operations.
-- The baseUrl and endpoints correspond to the hospital wait time API on a
-  hosting service (Render).
-*/

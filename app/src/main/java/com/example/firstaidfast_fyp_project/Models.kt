@@ -5,22 +5,12 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-// Represents a summary of the hospital queue: total wait time and count of patients
 data class HospitalQueueSummary(
-    val totalWait: Int,     // The sum of estimated wait times for all queueing patients
-    val patientCount: Int   // The number of patients currently in queue
+    val totalWait: Int,
+    val patientCount: Int
 )
 
-// Represents a single entry/item in the hospital waitlist
 data class WaitlistItem(
-<<<<<<< HEAD
-    val patientID: String,        // Unique ID assigned to the patient
-    val condition: String,        // Patient's condition
-    val severity: String,         // Severity category for the condition
-    val queueNumber: Int,         // The queue position assigned to the patient
-    val estimatedWaitTime: Int,   // The current estimated wait time for this patient
-    val status: String            // Current status, e.g. "Queueing for", "With Doctor", etc.
-=======
     val patientID: String,
     val condition: String,
     val severity: String,
@@ -28,50 +18,33 @@ data class WaitlistItem(
     val estimatedWaitTime: Int,
     val status: String,
     val wasSeen: Boolean
->>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
 )
 
-// Represents a hospital with location coordinates
 data class Hospital(
-    val name: String,       // The hospital's name
-    val latitude: Double,   // The hospital's latitude coordinate
-    val longitude: Double   // The hospital's longitude coordinate
+    val name: String,
+    val latitude: Double,
+    val longitude: Double
 ) {
-    /**
-     * Calculates the distance (in kilometers) from the userLat/userLon to
-     * this hospital's latitude/longitude using the Haversine formula.
-     */
     fun calculateDistance(userLat: Double, userLon: Double): Double {
-        val radius = 6371.0 // Earth's radius in km
-
-        // Differences in latitude and longitude in radians
+        val radius = 6371.0
         val latDiff = Math.toRadians(latitude - userLat)
         val lonDiff = Math.toRadians(longitude - userLon)
 
-        // Haversine formula components
-        val a = sin(latDiff / 2) * sin(latDiff / 2) +
-                cos(Math.toRadians(userLat)) * cos(Math.toRadians(latitude)) *
-                sin(lonDiff / 2) * sin(lonDiff / 2)
+        val a = Math.sin(latDiff / 2) * Math.sin(latDiff / 2) +
+                Math.cos(Math.toRadians(userLat)) * Math.cos(Math.toRadians(latitude)) *
+                Math.sin(lonDiff / 2) * Math.sin(lonDiff / 2)
 
-        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
-
-        // Distance in kilometers
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
         return radius * c
     }
 }
 
-/**
- * getNearbyHospitals returns a list of sample hospitals within 200 km of the user's location.
- * Adjust the distance threshold or hospital list as needed.
- */
 fun getNearbyHospitals(userLat: Double, userLon: Double): List<Hospital> {
-    // A predefined sample list of hospitals
     val sampleHospitals = listOf(
         Hospital("St. James's Hospital", 53.3407, -6.2949),
         Hospital("Cork University Hospital", 51.8827, -8.5122),
         Hospital("My House", 52.63741236733832, -7.628223896026611)
     )
 
-    // Filters the sample hospitals by a 200 km distance threshold
     return sampleHospitals.filter { it.calculateDistance(userLat, userLon) <= 200 }
 }
