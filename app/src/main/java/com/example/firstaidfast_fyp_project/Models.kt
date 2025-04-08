@@ -13,12 +13,22 @@ data class HospitalQueueSummary(
 
 // Represents a single entry/item in the hospital waitlist
 data class WaitlistItem(
+<<<<<<< HEAD
     val patientID: String,        // Unique ID assigned to the patient
     val condition: String,        // Patient's condition
     val severity: String,         // Severity category for the condition
     val queueNumber: Int,         // The queue position assigned to the patient
     val estimatedWaitTime: Int,   // The current estimated wait time for this patient
     val status: String            // Current status, e.g. "Queueing for", "With Doctor", etc.
+=======
+    val patientID: String,
+    val condition: String,
+    val severity: String,
+    val queueNumber: Int,
+    val estimatedWaitTime: Int,
+    val status: String,
+    val wasSeen: Boolean
+>>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
 )
 
 // Represents a hospital with location coordinates
@@ -57,9 +67,9 @@ data class Hospital(
 fun getNearbyHospitals(userLat: Double, userLon: Double): List<Hospital> {
     // A predefined sample list of hospitals
     val sampleHospitals = listOf(
-        Hospital("St. James's Hospital", 53.3390, -6.2958),
-        Hospital("Cork University Hospital", 51.9000, -8.5000),
-        Hospital("Random Far Hospital", 55.0000, -9.0000)
+        Hospital("St. James's Hospital", 53.3407, -6.2949),
+        Hospital("Cork University Hospital", 51.8827, -8.5122),
+        Hospital("My House", 52.63741236733832, -7.628223896026611)
     )
 
     // Filters the sample hospitals by a 200 km distance threshold

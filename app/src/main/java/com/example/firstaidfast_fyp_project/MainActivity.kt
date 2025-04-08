@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import com.example.firstaidfast_fyp_project.ui.theme.FirstAidFastFYP_ProjectTheme
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+<<<<<<< HEAD
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -32,6 +33,9 @@ import kotlin.math.sqrt
  * It fetches the user's location and then renders a HospitalQueueScreen
  * with the obtained latitude and longitude.
  */
+=======
+
+>>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
 class MainActivity : ComponentActivity() {
 
     // Instance of LocationManager to manage location permission and fetching
@@ -62,8 +66,12 @@ class MainActivity : ComponentActivity() {
                 setContent {
                     // Applies a Material 3 theme to the composition
                     FirstAidFastFYP_ProjectTheme {
+<<<<<<< HEAD
                         // Displays a HospitalQueueScreen, passing the location coordinates
                         HospitalQueueScreen(userLat = userLat, userLon = userLon)
+=======
+                        Navigation(userLat = userLat, userLon = userLon)
+>>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
                     }
                 }
             } ?: Log.e("MainActivity", "Failed to fetch location")
@@ -71,3 +79,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)

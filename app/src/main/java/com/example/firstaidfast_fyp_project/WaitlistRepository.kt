@@ -19,6 +19,7 @@ object WaitlistRepository {
             .build()
     }
 
+<<<<<<< HEAD
     // Creates a lazy-initialised WaitlistApi interface from the Retrofit instance.
     // This interface defines the endpoints for fetching hospital wait info.
     private val waitlistApi: WaitlistApi by lazy {
@@ -39,6 +40,26 @@ object WaitlistRepository {
      */
     suspend fun fetchWaitlist(): List<WaitlistItem> {
         return waitlistApi.getWaitlist()
+=======
+    private val api: WaitlistApi by lazy {
+        retrofit.create(WaitlistApi::class.java)
+    }
+
+    suspend fun fetchHospitalWaitTime(hospital: String): HospitalQueueSummary {
+        return when (hospital) {
+            "St. James's Hospital" -> api.getHospitalAWaitTime()
+            "Cork University Hospital" -> api.getHospitalBWaitTime()
+            else -> HospitalQueueSummary(0, 0)
+        }
+    }
+
+    suspend fun fetchWaitlist(hospital: String): List<WaitlistItem> {
+        return when (hospital) {
+            "St. James's Hospital" -> api.getHospitalAWaitlist()
+            "Cork University Hospital" -> api.getHospitalBWaitlist()
+            else -> emptyList()
+        }
+>>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)
     }
 }
 

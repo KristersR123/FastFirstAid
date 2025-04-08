@@ -8,6 +8,7 @@ import retrofit2.http.GET
  * generate HTTP requests.
  */
 interface WaitlistApi {
+<<<<<<< HEAD
 
     /**
      * GET endpoint that fetches a HospitalQueueSummary object
@@ -40,3 +41,17 @@ Explanation in the project context:
 - Both endpoints are defined as suspend functions, meaning they can be
   called within Kotlin coroutines for asynchronous, non-blocking operations.
 */
+=======
+    @GET("hospitalA/hospital-wait-time")
+    suspend fun getHospitalAWaitTime(): HospitalQueueSummary
+
+    @GET("hospitalB/hospital-wait-time")
+    suspend fun getHospitalBWaitTime(): HospitalQueueSummary
+
+    @GET("hospitalA/waitlist")
+    suspend fun getHospitalAWaitlist(): List<WaitlistItem>
+
+    @GET("hospitalB/waitlist")
+    suspend fun getHospitalBWaitlist(): List<WaitlistItem>
+}
+>>>>>>> 6cd7d03 (added hospitaldetail screen + google navigation)

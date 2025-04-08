@@ -88,9 +88,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
-    // (If you prefer versions from the version catalog, remove or unify with version-catalog references)
-    // implementation(libs.androidx.lifecycle.viewModelKtx)
-    // implementation(libs.androidx.lifecycle.runtimeKtx)
 
     // Compose UI & Activity (if not fully handled by version catalog)
      implementation("androidx.compose.ui:ui:<version>")
@@ -99,5 +96,7 @@ dependencies {
     // Kotlinx Serialization
     // Make sure the plugin is applied. This is the runtime library:
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
+    implementation ("androidx.navigation:navigation-compose:2.7.6")
 
 }
